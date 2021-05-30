@@ -16,7 +16,7 @@ Inspector Example (Image);
 ![materialSetup](https://cdn.discordapp.com/attachments/690680866304819289/848006349908606997/unknown.png)
 
 Script example;
-```
+```cs
 Paintable paintThingy = gameObject.AddComponent<Paintable>();
 
 paintThingy.paintTypes = new Material[]
@@ -35,7 +35,7 @@ Inspector example;
 ![exampleSetup](https://cdn.discordapp.com/attachments/690680866304819289/848005886969511966/unknown.png)
 
 Script example;
-```
+```cs
 Paintable paintThingy = gameObject.AddComponent<Paintable>();
 paintThingy.rendererIndex = gameObject.GetComponent<Renderer>();
 ```
@@ -43,7 +43,7 @@ After doing that, you'll want to save the values somewhere right?
 Thankfully this is incredibly easy, all you'll need is these two values into whatever save system you decide to use!
 
 Example script (Using [SaveBytes](https://github.com/Horsey4/HorseyLib));
-```
+```cs
             SaveBytes.Save(saveFile, new object[]
             {
                 //0
@@ -55,7 +55,7 @@ Example script (Using [SaveBytes](https://github.com/Horsey4/HorseyLib));
 To apply the saved values you'll want to call the "ApplyPaintSave(color, type)" void
 
 Example script (Using [SaveBytes](https://github.com/Horsey4/HorseyLib));
-```
+```cs
 var saveData = SaveBytes.Load(saveFile);
 paintThingy.ApplyPaintSave(((sColor)saveData[0]).get(), (int)saveData[1]);
 ```
