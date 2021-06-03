@@ -52,8 +52,8 @@ public class Paintable : MonoBehaviour
         }
         catch (Exception ex)
         {
-            ModConsole.LogError($"Failed to paint {name}");
-            ModConsole.LogError($"{ex}");
+            ModConsole.Error($"Failed to paint {name}");
+            ModConsole.Error($"{ex}");
         }
     }
 
