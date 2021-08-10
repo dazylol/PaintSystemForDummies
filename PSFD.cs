@@ -1,4 +1,4 @@
-﻿using HutongGames.PlayMaker;
+using HutongGames.PlayMaker;
 using System.Collections;
 using UnityEngine;
 using MSCLoader;
@@ -19,6 +19,7 @@ public class Paintable : MonoBehaviour
     public Color PaintColor = Color.white;
 
     public Renderer rendererIndex;
+	public int materialIndex;
 
     GameObject canObj;
     bool waitingPaint;
@@ -35,7 +36,7 @@ public class Paintable : MonoBehaviour
 
     IEnumerator PaintWait()
     {
-        waitingPaint = canLvl.Value > 1 ? true : false;
+        waitingPaint = canLvl.Value > 1;
         yield return new WaitForSeconds(3f);
         if (waitingPaint) ApplyPaintSave(canColor.Value, canType.Value);
     }
@@ -44,8 +45,8 @@ public class Paintable : MonoBehaviour
     {
         try
         {
-            rendererIndex.material = paintTypes[type];
-            rendererIndex.material.color = color;
+            rendererIndex.materials[materialIndex] = paintTypes[type];
+            rendererIndex.materials[materialIndex].color = color;
             PaintColor = color;
             paintType = type;
             waitingPaint = false;
@@ -64,12 +65,9 @@ public class Paintable : MonoBehaviour
             if (PaintedObject.Value == gameObject && !waitingPaint)
                 StartCoroutine(PaintWait());
         }
-        else if (waitingPaint) PaintCancel();
-    }
-
-    void PaintCancel()
-    {
-        StopCoroutine(PaintWait());
-        waitingPaint = false;
+        else if (waitingPaint) {
+            StopCoroutine(PaintWait());
+            waitingPaint = false;
+        }
     }
 }
